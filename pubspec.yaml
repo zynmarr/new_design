@@ -1,0 +1,41 @@
+name: message_apps
+description: A new Flutter project.
+
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^0.1.3
+  font_awesome_flutter:
+  flutter_swiper: ^1.1.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/img/
+
+  fonts:
+    - family: Viga
+      fonts:
+        - asset: assets/fonts/Viga-Regular.ttf
+    - family: Kaushan
+      fonts:
+        - asset: assets/fonts/KaushanScript-Regular.ttf
+    - family: Courgette
+      fonts:
+        - asset: assets/fonts/Courgette-Regular.ttf
