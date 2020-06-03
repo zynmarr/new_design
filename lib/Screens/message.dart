@@ -1,0 +1,234 @@
+import 'package:flutter/material.dart';
+import 'package:message_apps/Models/messageModels.dart';
+import 'package:message_apps/Models/userModels.dart';
+
+class SendMsg extends StatefulWidget {
+  final User user;
+  SendMsg({
+    this.user,
+  });
+  @override
+  _SendMsgState createState() => _SendMsgState();
+}
+
+class _SendMsgState extends State<SendMsg> {
+  bool btnSend = false;
+  String pesan;
+
+  enable() {
+    setState(() {
+      btnSend = true;
+    });
+  }
+
+  bool _autoValidate = true;
+
+  final _key = GlobalKey<FormState>();
+
+  Widget getMsg(pesan) {
+    return Container(
+      margin: EdgeInsets.only(top: 30, left: 10),
+      alignment: Alignment.centerLeft,
+      child: Baseline(
+        baseline: 1,
+        baselineType: TextBaseline.alphabetic,
+        child: Container(
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.white,
+          ),
+          child: Text(
+            pesan,
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget sendMsg(send, bool read) {
+    return Container(
+      margin: EdgeInsets.only(top: 30, right: 10),
+      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 3),
+      alignment: Alignment.centerRight,
+      child: Baseline(
+        baseline: 2,
+        baselineType: TextBaseline.alphabetic,
+        child: Container(
+          // width: MediaQuery.of(context).size.width / 2,
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.orange[400],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                send,
+                style: TextStyle(fontSize: 18),
+              ),
+              Container(
+                // alignment: Alignment.bottomRight,
+                width: 100,
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      "12:20 AM",
+                      style: TextStyle(
+                        fontSize: 11,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(3),
+                    ),
+                    Icon(
+                      Icons.done_all,
+                      color: read == false ? Colors.grey : Colors.blueAccent,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  kirim() {
+    if (_key.currentState.validate()) {
+      _key.currentState.save();
+      setState(() {});
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.grey[200],
+        appBar: AppBar(
+          title: Text(widget.user.name),
+
+          backgroundColor: Color(0xFFff1744),
+          elevation: 0.0,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.more_vert,
+                size: 30.0,
+                color: Colors.white
+              ),
+              onPressed: () {},
+            ),
+          ],
+          iconTheme: IconThemeData(color: Colors.white),
+          actionsIconTheme: IconThemeData(color: Colors.white),
+        ),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                padding: EdgeInsets.only(top: 10),
+                // color: Colors.grey[200],
+                child: ListView.builder(
+                  itemCount: messages.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final message = messages[index];
+                    final bool isMe = message.sender.id == currentUser.id;
+                    final bool notMe = message.sender.id == widget.user.id;
+                    final bool relasi = message.relation == widget.user.name;
+                    return isMe
+                        ? relasi
+                            ? sendMsg(message.text, message.unread)
+                            : SizedBox()
+                        : notMe ? getMsg(message.text) : SizedBox();
+                  },
+                ),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 70,
+              color: Colors.transparent,
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                mainAxisAlignment: btnSend == false
+                    ? MainAxisAlignment.center
+                    : MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Expanded(
+                    child: Form(
+                      autovalidate: _autoValidate,
+                      key: _key,
+                      child: Container(
+                        height: 45,
+                        width: btnSend == false
+                            ? MediaQuery.of(context).size.width
+                            : 300,
+                        padding: EdgeInsets.only(left: 5, right: 5),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          // borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: TextFormField(
+                          maxLines: 2,
+                          onChanged: (bool) {
+                            enable();
+                          },
+                          onSaved: (e) {
+                            pesan = e;
+                          },
+                          validator: (e) {
+                            if (e.isNotEmpty) {
+                              return null;
+                            }
+                            return null;
+                          },
+                          
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Ketik Pesan",
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  btnSend == false
+                      ? Padding(
+                          padding: EdgeInsets.all(0),
+                        )
+                      : Container(
+                          width: 55,
+                          height: 55,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              kirim();
+                            },
+                            child: Icon(
+                              Icons.send,
+                              size: 30,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

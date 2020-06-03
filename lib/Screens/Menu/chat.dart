@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:message_apps/Models/messageModels.dart';
 import 'package:message_apps/Models/userModels.dart';
+import 'package:message_apps/Screens/message.dart';
 import 'package:message_apps/items/onlineUsers.dart';
 // import 'package:message_apps/items/recentMsg.dart';
 
@@ -23,7 +24,7 @@ class _ChatState extends State<Chat> {
       height: 80,
       child: InkWell(
         onTap: () {
-          // Navigator.push(context, MaterialPageRoute(builder: (context)=> SendMsg(user: data)));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> SendMsg(user: data,)));
         },
         onLongPress: () {
           setState(() {
@@ -230,13 +231,13 @@ class _ChatState extends State<Chat> {
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => SendMsg(
-                          //               user: likes[index],
-                          //             )));
-                          //             print(likes[index].id);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SendMsg(
+                                        user: likes[index],
+                                      )));
+                                      print(likes[index].id);
                           setState(() {});
                         },
                         child: OnlineUser(
