@@ -60,14 +60,17 @@ class _SendMsgState extends State<SendMsg> {
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: Colors.orange[400],
+            color: Color(0xFFff1744),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               Text(
                 send,
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
               ),
               Container(
                 // alignment: Alignment.bottomRight,
@@ -80,7 +83,8 @@ class _SendMsgState extends State<SendMsg> {
                     Text(
                       "12:20 AM",
                       style: TextStyle(
-                        fontSize: 11,
+                        fontSize: 13,
+                        color: Colors.white,
                       ),
                     ),
                     Padding(
@@ -114,16 +118,11 @@ class _SendMsgState extends State<SendMsg> {
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
           title: Text(widget.user.name),
-
           backgroundColor: Color(0xFFff1744),
           elevation: 0.0,
           actions: <Widget>[
             IconButton(
-              icon: Icon(
-                Icons.more_vert,
-                size: 30.0,
-                color: Colors.white
-              ),
+              icon: Icon(Icons.more_vert, size: 30.0, color: Colors.white),
               onPressed: () {},
             ),
           ],
@@ -192,7 +191,6 @@ class _SendMsgState extends State<SendMsg> {
                             }
                             return null;
                           },
-                          
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Ketik Pesan",
@@ -206,10 +204,11 @@ class _SendMsgState extends State<SendMsg> {
                           padding: EdgeInsets.all(0),
                         )
                       : Container(
-                          width: 55,
-                          height: 55,
+                          width: 40,
+                          height: 40,
+                          margin: EdgeInsets.only(left: 10),
                           decoration: BoxDecoration(
-                            color: Colors.blue,
+                            color: Color(0xFFff1744),
                             borderRadius: BorderRadius.circular(50),
                           ),
                           child: InkWell(
@@ -218,8 +217,8 @@ class _SendMsgState extends State<SendMsg> {
                             },
                             child: Icon(
                               Icons.send,
-                              size: 30,
-                              color: Colors.black,
+                              size: 25,
+                              color: Colors.white,
                             ),
                           ),
                         ),
