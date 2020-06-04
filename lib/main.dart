@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:message_apps/Screens/login.dart';
 import 'package:message_apps/Screens/menu.dart';
 
 void main() => runApp(MyApp());
@@ -8,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Travel App',
-      home: Menu(),
+      home: Login(),
       debugShowCheckedModeBanner: false,
     );
   }
