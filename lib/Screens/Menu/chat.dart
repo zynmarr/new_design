@@ -11,7 +11,7 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
-  bool onTapChange = false;
+  bool onTapChange = true;
   Widget recentMsg(
     String name,
     image,
@@ -24,11 +24,16 @@ class _ChatState extends State<Chat> {
       height: 80,
       child: InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> SendMsg(user: data,)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SendMsg(
+                        user: data,
+                      )));
         },
         onLongPress: () {
           setState(() {
-            onTapChange = !onTapChange;
+            onTapChange = false;
           });
         },
         child: Padding(
@@ -46,6 +51,25 @@ class _ChatState extends State<Chat> {
                       fit: BoxFit.fill,
                     ),
                   ),
+                  child: onTapChange
+                      ? Container()
+                      : Container(
+                          alignment: Alignment.bottomRight,
+                          // padding: EdgeInsets.all(10),
+                          child: Container(
+                            height: 25,
+                            width: 25,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            child: Icon(
+                              Icons.done,
+                              color: Colors.white,
+                              size: 18,
+                            ),
+                          ),
+                        ),
                 ),
               ),
               SizedBox(
@@ -237,7 +261,7 @@ class _ChatState extends State<Chat> {
                                   builder: (context) => SendMsg(
                                         user: likes[index],
                                       )));
-                                      print(likes[index].id);
+                          print(likes[index].id);
                           setState(() {});
                         },
                         child: OnlineUser(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:message_apps/Screens/Menu/home.dart';
+import 'package:message_apps/Screens/menu.dart';
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   var _autovalidate = true;
   bool _secureText = true;
 
-  bool _remember = false;
+  bool remember = false;
   final _key = GlobalKey<FormState>();
   showHide() {
     setState(() {
@@ -103,8 +103,8 @@ class _LoginWidgetState extends State<LoginWidget> {
               padding: const EdgeInsets.all(0.0),
               onPressed: () {
                 setState(() {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => Home()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Menu()));
                 });
               },
               color: Colors.transparent,
