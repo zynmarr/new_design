@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:message_apps/Models/userModels.dart';
+import 'package:message_apps/Screens/shoUser.dart';
 import 'dart:ui';
 import 'package:message_apps/items/itemSwipers.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -89,14 +90,26 @@ class _HomeState extends State<Home> {
                                 itemCount: users.length,
                                 itemBuilder: (context, index) {
                                   var x = users[index];
-                                  return Cards(
-                                    x.imageUrl,
-                                    x.name,
-                                    x.old,
-                                    x.gender,
-                                    x.jobs,
-                                    x.location,
-                                    x.verified,
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ShowUser(
+                                            data: x,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Cards(
+                                      x.imageUrl,
+                                      x.name,
+                                      x.old,
+                                      x.gender,
+                                      x.jobs,
+                                      x.location,
+                                      x.verified,
+                                    ),
                                   );
                                 },
                                 controller: controllerSwipe,
