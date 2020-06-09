@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:message_apps/Screens/profileUser.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -7,7 +8,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   bool verified = false;
   final List<String> imageList = [
     "assets/img/p1.jpg",
@@ -39,7 +39,14 @@ class _ProfileState extends State<Profile> {
                           size: 22.0,
                           color: Colors.black54,
                         ),
-                        onPressed: () {}),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProfileUser(),
+                            ),
+                          );
+                        }),
                   ],
                 ),
               ),
